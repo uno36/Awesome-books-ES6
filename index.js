@@ -1,8 +1,12 @@
 import Store from './modules/store.js';
 import UI from './modules/UI.js';
 import Book from './modules/book.js';
+import formattedDate from './modules/date.js';
 
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
+
+const dateElement = document.querySelector('#date');
+dateElement.textContent = formattedDate;
 
 document.querySelector('#form').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -13,6 +17,7 @@ document.querySelector('#form').addEventListener('submit', (e) => {
   UI.addBookToList(book);
   Store.addBook(book);
   UI.clearFields();
+  addBook();
 });
 
 document.querySelector('#books').addEventListener('click', (e) => {
@@ -63,20 +68,3 @@ contact.addEventListener('click', () => {
   awesome.classList.add('hidden');
   contactSection.classList.remove('hidden');
 });
-
-const error = document.querySelector('.error');
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-
-if (Book.title.trim() !== '' && Book.author.trim() !== '') {
-  Store.push(Book);
-  Store.addBook();
-  UI.displayBooks();
-  error.innerHTML = 'Success !!!';
-  error.classList.replace('error', 'success');
-  title.value = '';
-  author.value = '';
-} else {
-  error.classList.replace('success', 'error');
-  error.innerHTML = 'Auther or Book Title can"t be empty';
-}
