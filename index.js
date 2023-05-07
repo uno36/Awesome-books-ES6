@@ -17,7 +17,6 @@ document.querySelector('#form').addEventListener('submit', (e) => {
   UI.addBookToList(book);
   Store.addBook(book);
   UI.clearFields();
-  addBook();
 });
 
 document.querySelector('#books').addEventListener('click', (e) => {
